@@ -22,6 +22,7 @@
 		2E20CB6B2702D13200879241 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E20CB6A2702D13200879241 /* HeaderView.swift */; };
 		2E20CB6D2702D4B000879241 /* ShadowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E20CB6C2702D4B000879241 /* ShadowImageView.swift */; };
 		2E20CB6F2702D6EF00879241 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E20CB6E2702D6EF00879241 /* NewsTableViewCell.swift */; };
+		2EF777C22703BDA4000EA2C9 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF777C12703BDA4000EA2C9 /* CustomCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		2E20CB6A2702D13200879241 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Header\U0010View.swift"; sourceTree = "<group>"; };
 		2E20CB6C2702D4B000879241 /* ShadowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowImageView.swift; sourceTree = "<group>"; };
 		2E20CB6E2702D6EF00879241 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		2EF777C12703BDA4000EA2C9 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				2E20CB6A2702D13200879241 /* HeaderView.swift */,
 				2E20CB6C2702D4B000879241 /* ShadowImageView.swift */,
 				2E20CB6E2702D6EF00879241 /* NewsTableViewCell.swift */,
+				2EF777C12703BDA4000EA2C9 /* CustomCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 			files = (
 				2E20CB682702D00E00879241 /* NewsListModel.swift in Sources */,
 				2E20CB6F2702D6EF00879241 /* NewsTableViewCell.swift in Sources */,
+				2EF777C22703BDA4000EA2C9 /* CustomCollectionViewCell.swift in Sources */,
 				2E20CB632702CA4000879241 /* NetworkManager.swift in Sources */,
 				2E20CB302702C3DA00879241 /* ViewController.swift in Sources */,
 				2E20CB2C2702C3DA00879241 /* AppDelegate.swift in Sources */,

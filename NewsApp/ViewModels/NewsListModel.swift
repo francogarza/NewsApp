@@ -9,12 +9,14 @@ import Foundation
 
 class NewsListModel {
     
+    var topic = String()
+    
     var newsVM = [NewsViewModel]()
     
     let reuseID = "news"
     
     func getNews(completion: @escaping ([NewsViewModel]) -> Void) {
-        NetworkManager.shared.getNews { (news) in
+        NetworkManager.shared.getNews(topic: topic) { (news) in
             guard let news = news else { return }
             let newsVM = news.map(NewsViewModel.init)
             DispatchQueue.main.async {

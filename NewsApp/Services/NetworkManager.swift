@@ -16,8 +16,8 @@ class NetworkManager {
     private let baseUrlString = "https://newsapi.org/v2/"
     private let USTopHeadline = "top-headlines?country=us"
     // GET NEWS
-    func getNews(completion: @escaping ([News]?) -> Void) {
-        let urlString = "\(baseUrlString)\(USTopHeadline)&apiKey=\(APIKey.key)"
+    func getNews(topic: String, completion: @escaping ([News]?) -> Void) {
+        let urlString = "\(baseUrlString)\(USTopHeadline)&category=\(topic)&apiKey=\(APIKey.key)"
         guard let url = URL(string: urlString) else {
             return
         }

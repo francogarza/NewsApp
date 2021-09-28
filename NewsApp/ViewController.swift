@@ -8,12 +8,31 @@
 import UIKit
 import SafariServices
 
-class ViewController: UIViewController {
+// CONSTANTS
+
+
+class ViewController: UIViewController{
 
     let viewModel = NewsListModel()
     
+    let topics = ["Business", "Entertainment", "Health", "Technology", "Sports"]
+    var selectedRow = Int()
+    
     private lazy var headerView: HeaderView = {
         let v = HeaderView(fontSize: 32)
+        return v
+    }()
+    
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        v.backgroundColor = .white
+        v.allowsSelection = true
+        v.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        v.showsHorizontalScrollIndicator = false
         return v
     }()
     
@@ -27,9 +46,11 @@ class ViewController: UIViewController {
         return v
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.topic = "general"
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         setupView()
         fetchNews()
@@ -39,6 +60,7 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(headerView)
         view.addSubview(tableView)
+        view.addSubview(collectionView)
         
         setupConstraints()
     }
@@ -50,11 +72,18 @@ class ViewController: UIViewController {
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
             
         ])
+        // collectionView
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 30)
+        ])
         // tableView
         NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 8),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
@@ -62,6 +91,7 @@ class ViewController: UIViewController {
     func fetchNews(){
         viewModel.getNews { (_) in
             self.tableView.reloadData()
+            self.collectionView.reloadData()
         }
     }
 
@@ -92,4 +122,34 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         safariViewController.modalPresentationStyle = .fullScreen
         present(safariViewController, animated: true)
     }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.height * 5, height: collectionView.frame.height/1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return topics.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCollectionViewCell
+        cell.title.textColor = .systemBlue
+        cell.contentView.backgroundColor = .white
+        if indexPath.row == selectedRow {
+            cell.title.textColor = .white
+            cell.contentView.backgroundColor = .systemBlue
+        }
+        cell.title.text = topics[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        let cell = collectionView.cellForItem(at: indexPath) as! CustomCollectionViewCell
+        viewModel.topic = cell.title.text!
+        fetchNews()
+    }
+    
 }
