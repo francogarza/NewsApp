@@ -15,8 +15,8 @@ class ViewController: UIViewController{
 
     let viewModel = NewsListModel()
     
-    let topics = ["Business", "Entertainment", "Health", "Technology", "Sports"]
-    var selectedRow = Int()
+    let topics = ["General", "Business", "Entertainment", "Health", "Technology", "Sports"]
+    var selectedRow = 0
     
     private lazy var headerView: HeaderView = {
         let v = HeaderView(fontSize: 32)
